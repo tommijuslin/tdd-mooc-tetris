@@ -11,7 +11,11 @@ export class Board {
   }
 
   drop(block) {
-    this.falling = block;
+    if (this.hasFalling()) {
+      throw("already falling.");
+    } else {
+      this.falling = block;
+    }
   }
 
   tick() {
