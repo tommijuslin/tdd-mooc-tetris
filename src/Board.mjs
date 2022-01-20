@@ -14,12 +14,16 @@ export class Board {
     this.falling = block;
   }
 
+  tick() {
+    this.falling.x += 1;
+  }
+
   hasFalling() {
     return this.falling != null;
   }
   
   hasFallingAt(row, col) {
-    return this.hasFalling() && row == 0 && col == 1;
+    return this.hasFalling() && row == this.falling.x && col == this.falling.y;
   }
 
   toString() {
