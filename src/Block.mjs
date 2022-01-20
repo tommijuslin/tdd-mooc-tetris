@@ -4,4 +4,8 @@ export class Block {
   constructor(color) {
     this.color = color;
   }
+
+  get color() {
+    return this.color;
+  }
 }
