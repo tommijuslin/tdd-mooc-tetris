@@ -1,11 +1,11 @@
 export class Block {
   color;
-  x;
-  y;
+  row;
+  col;
 
-  constructor(color, x = 0, y = 1) {
+  constructor(color, row = 0, col = 1) {
     this.color = color;
-    this.x = x;
-    this.y = y;
+    this.row = row;
+    this.col = col;
   }
 }

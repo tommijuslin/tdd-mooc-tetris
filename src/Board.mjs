@@ -3,11 +3,14 @@ const EMPTY = ".";
 export class Board {
   width;
   height;
+  falling;
+  landed;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.falling = null;
+    this.landed = Array(width).fill().map(() => Array(height).fill(EMPTY))
   }
 
   drop(block) {
@@ -19,23 +22,28 @@ export class Board {
   }
 
   tick() {
-    this.falling.x += 1;
+    if (this.falling.row == this.height - 1) {
+      this.landed[this.falling.row][this.falling.col] = this.falling.color;
+      this.falling = null;
+    } else {
+      this.falling.row += 1;
+    }
   }
 
   hasFalling() {
     return this.falling != null;
   }
-  
+
   hasFallingAt(row, col) {
-    return this.hasFalling() && row == this.falling.x && col == this.falling.y;
+    return this.hasFalling() && row == this.falling.row && col == this.falling.col;
   }
 
   toString() {
     let string = ""
-    
+
     for (let row = 0; row < this.width; row++) {
       for (let col = 0; col < this.height; col++) {
-        this.hasFallingAt(row, col) ? string += this.falling.color : string += EMPTY
+        string += this.hasFallingAt(row, col) ? this.falling.color : this.landed[row][col]
       }
       string += "\n";
     }
