@@ -22,12 +22,17 @@ export class Board {
   }
 
   tick() {
-    if (this.falling.row == this.height - 1) {
+    if (this.notSafe()) {
       this.landed[this.falling.row][this.falling.col] = this.falling.color;
       this.falling = null;
     } else {
       this.falling.row += 1;
     }
+  }
+
+  notSafe() {
+    return this.falling.row == this.height - 1
+      || this.landed[this.falling.row+1][this.falling.col] != EMPTY
   }
 
   hasFalling() {
